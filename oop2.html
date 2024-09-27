@@ -1,0 +1,81 @@
+<!-- *********************************this keyword on browser*************************** -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this on browser</title>
+</head>
+<body>
+    <script>
+        // console.log(this)  // prints window object
+
+
+        function foo(){
+            console.log(this) // prints window object
+        }
+        // foo()
+
+
+        const obj = {
+    par1: "Hello world",
+    myFun: function () {
+      console.log(this); // { par1: 'Hello world', myFun: [Function: myFun] }
+        // console.log(this.par1); // Hello world
+    //   console.log(par1); // ReferenceError: par1 is not defined
+    }
+}
+// obj.myFun() // function called using object , this refers to the immediate object that holds this funtion
+
+
+const obja = {
+  par1: "Hello world",
+  objb: {
+    par2: "Inside obj2 object",
+    boo: function () {
+      //   console.log(objb.par2); //ReferenceError: par2 is not defined ReferenceError: objb is not defined
+      // console.log(par2); //ReferenceError: par2 is not defined
+      //   console.log(obja.objb.par2); // Inside obj2 object . In order to access anything inside the nexted objects we need to do obja.objb.
+
+      function foo() {
+        console.log(this); //  window object as the function foo() is called by itself
+      }
+      foo()
+
+        //   console.log(this.par2); // this refers to current object here o/p: Inside obj2 object
+        // console.log(this.par1) //undefined as current object does not have any variable called par1
+    },
+  },
+};
+
+// obja.objb.boo() // calling function through nested objects
+
+
+const myArrow = () => {
+  console.log(this)
+}
+// myArrow() // window
+
+const arrObj = {
+  prop: 'This an is object',
+  obArr: () => {
+    console.log(this)
+  }
+}
+// arrObj.obArr() // window
+
+const arrObj1 = {
+  prop: 'This an is object',
+  obArr: function () {
+    const innerArraow = () => {
+      console.log(this);
+    }
+    innerArraow()
+  }
+}
+// arrObj1.obArr(); // { prop: 'This an is object', obArr: [Function: obArr] }
+
+    </script>
+</body>
+</html>
